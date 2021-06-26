@@ -2,6 +2,6 @@
 title = "Web site"
 +++
 
-## James' web site.
+## James' website.
 
-This is James Guthrie's web site. There's not much here yet. Check back later.
+Hi I'm James. I'm a software engineer based in Switzerland. I like to dabble with software and hardware projects. I hope to share some of these on this website and blog.
