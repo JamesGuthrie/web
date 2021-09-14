@@ -12,7 +12,7 @@ The following documents the steps that I took to get NixOS installed on the Pi. 
 
 NixOS offers a few different methods for installing on a Pi. As mentioned, their recommended method for the Pi is to burn an SD image and use that as a starting point. The NixOS manual's [Additional installation notes](https://nixos.org/manual/nixos/stable/index.html#sec-installation-additional-notes) lists the other methods which are available.
 
-In particular, the approach I wanted to take was to begin with a working Raspberry Pi OS running on the Pi, and install NixOS onto a USB SSD drive, and then use that as the boot medium for the Pi. I also wanted to use BTRFS for the main data partition, under the assumption that I may want to add a second disk in a RAID 10 setup later.
+In particular, the approach I wanted to take was to begin with a working Raspberry Pi OS running on the Pi, and install NixOS onto a USB SSD drive, and then use that as the boot medium for the Pi. I also wanted to use Btrfs for the main data partition, under the assumption that I may want to add a second disk in a RAID 10 setup later.
 
 When I first started looking into how this could all work, I was concerned with how the `boot` partition would be populated, and whether it was BIOS or UEFI, if I needed to use or know what uboot is etc. In the end it turned out that NixOS just takes care of all of this for you, so there's no reason to sweat about it.
 
