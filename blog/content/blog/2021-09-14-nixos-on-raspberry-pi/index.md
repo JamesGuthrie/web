@@ -265,4 +265,4 @@ The following references were quite helpful in getting this all together:
 - [Switching Raspberry Pi OS to aarch64](https://www.raspberrypi.org/forums/viewtopic.php?t=250730)
 - [Booting Raspberry Pi 4 from USB](https://jamesachambers.com/new-raspberry-pi-4-bootloader-usb-network-boot-guide/)
 
-The [nix.dev tutorial](https://nix.dev/tutorials/installing-nixos-on-a-raspberry-pi) deserves special mention because I'm not sure if it's supposed to work, but it didn't work for me. 
+~~The [nix.dev tutorial](https://nix.dev/tutorials/installing-nixos-on-a-raspberry-pi) deserves special mention because I'm not sure if it's supposed to work, but it didn't work for me.~~ Addendum: it turns out that I willfully ignored a critical piece of the tutorial, which resulted in it not working. Totally my fault! Sorry and thanks to [Domen](https://twitter.com/domenkozar) for reaching out a helping hand!
