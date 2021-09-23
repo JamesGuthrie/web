@@ -21,6 +21,7 @@ highlight_code = true
 
 nav = [
     { name = "Blog", path = "/blog/" },
+    { name = "Contact", path = "/contact/" },
     { name = "TIL", path = "/til/" }
 ]
 
