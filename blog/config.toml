@@ -19,6 +19,8 @@ highlight_code = true
 [extra]
 # Put all your custom variables here
 
+dark_mode = true
+
 nav = [
     { name = "Blog", path = "/blog/" },
     { name = "Contact", path = "/contact/" },
