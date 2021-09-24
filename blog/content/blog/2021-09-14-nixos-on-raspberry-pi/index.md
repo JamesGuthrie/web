@@ -30,7 +30,7 @@ I'm going to skip the first step, and assume that you have an SD card ready onto
 
 In my case, the USB SSD shows as `/dev/sda`. As it already comes partitioned, and the Pi automounts things, we will have to unmount any mounted partitions. I used `df -h` to see which partitions were mounted. In my case it was only `/dev/sda1/`, so:
 
-```
+```bash
 sudo umount /dev/sda1
 ```
 
@@ -45,7 +45,7 @@ I wasn't sure how exactly the boot partition should be formatted (apparently the
 
 I used `gdisk` to format the drive:
 
-```
+```bash
 sudo gdisk /dev/sda
 ```
 
@@ -86,7 +86,7 @@ Finally, use the `w` command to write out the partition information.
 
 With the partitions written, we should now see the devices `/dev/sda{1,2,3}`. The next step is to format them appropriately:
 
-```
+```bash
 sudo mkfs.fat -F 32 -n boot /dev/sda1
 sudo mkswap -L swap /dev/sda2
 sudo apt install -y btrfs-progs
@@ -99,7 +99,7 @@ Now we have formatted, partitioned disks which are ready to have NixOS installed
 
 The first bad news: Nix only has precompiled aarch64 binaries (not armv7). By default, Raspberry Pi OS runs an armv7 architecture. Fortunately with the more recent versions of Raspberry Pi OS, it's very simple to switch the OS to aarch64.
 
-```
+```bash
 sudo rpi-update
 echo "arm_64bit=1" | sudo tee -a  /boot/config.txt
 sudo shutdown -r now
@@ -107,19 +107,18 @@ sudo shutdown -r now
 
 Now a `uname -a` should show the following (note the presence of aarch64):
 
-```
+```bash
 > uname -a
 Linux raspberrypi 5.10.63-v8+ #1450 SMP PREEMPT Wed Sep 8 14:34:17 BST 2021 aarch64 GNU/Linux
 ```
 
 Now we can continue with the Nix installation, note that you will need to replace `<VERSION_HERE>` with the actual NixOS version that you would like. I used `21.05`:
 
-```
+```bash
 curl -L https://nixos.org/nix/install | sh
 . $HOME/.nix-profile/etc/profile.d/nix.sh
 nix-channel --add https://nixos.org/channels/nixos-<VERSION_HERE> nixpkgs
 nix-channel --update
-
 ```
 
 ## Use Nix to install NixOS onto USB SSD
@@ -128,13 +127,13 @@ Before we can install NixOS, we need to mount the root and boot partitions into 
 
 The following should suffice, as Raspberry Pi OS doesn't appear to auto-mount the EFI or swap devices.
 
-```
+```bash
 sudo umount /dev/sda3
 ```
 
 Now we can mount the devices as follows:
 
-```
+```bash
 sudo mount /dev/disk/by-label/root /mnt
 sudo mkdir -p /mnt/boot
 sudo mount /dev/disk/by-label/boot /mnt/boot
@@ -147,19 +146,19 @@ sudo swapon /dev/disk/by-label/swap
 
 Now we need to install all of NixOS' tools, which we will be using to configure and build NixOS:
 
-```
+```bash
 nix-env -f '<nixpkgs>' -iA nixos-install-tools
 ```
 
 The next step is to auto-generate configuration based on the Raspberry Pi's hardware configuration. Running the following command will generate `configuration.nix` and `hardware-configuration.nix` files in `/mnt/etc/nixos/`. These files form the basis of how the NixOS installation is setup.
 
-```
+```bash
 sudo `which nixos-generate-config` --root /mnt
 ```
 
 Now comes the somewhat tedious, and honestly confusing part: fine-tuning the `.nix` files until they produce something bootable. It seems as though most of the documentation that I've found was somewhat conflicting about what _exactly_ needs to go into the `configuration.nix` file in order for it to produce a bootable `/boot` (in particular, the NixOS docs for [Raspberry Pi 4 Configuration](https://nixos.wiki/wiki/NixOS_on_ARM/Raspberry_Pi_4#Configuration) mention that the displayed config is out of date, but it appears as though that's what's required). It took a bit of trial and error, but in the end I settled on the following important bits:
 
-```
+```nix
   boot = {
     kernelPackages = pkgs.linuxPackages_rpi4;
     tmpOnTmpfs = true;
@@ -186,14 +185,14 @@ Once you've finished tweaking your `configuration.nix` file, you're ready to bui
 
 First we need to add the `nixbld` user and group to the Raspberry Pi. This seems to be necessary for Nix, I don't understand why, but it is.
 
-```
+```bash
 sudo groupadd -g 30000 nixbld
 sudo useradd -u 30000 -g nixbld -G nixbld nixbld
 ```
 
 With the following command, NixOS is built, and the `/mnt` directory is populated:
 
-```
+```bash
 sudo PATH="$PATH" NIX_PATH="$NIX_PATH" `which nixos-install` --show-trace --root /mnt
 ```
 
@@ -231,7 +230,7 @@ Raspberry Pi OS provides the useful `raspi-config` utility which can be used to 
 
 The following command will drop you into an interactive editor to edit the EEPROM config: 
 
-```
+```bash
 sudo -E rpi-eeprom-config --edit
 ```
 
