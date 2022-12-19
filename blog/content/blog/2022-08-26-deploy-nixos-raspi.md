@@ -162,8 +162,12 @@ nix result path:
 
 Wow! Well that's enough success for one evening. In part II we'll take a look at deploying the config to the Pis, and maybe I'll figure out the secrets thing.
 
+# Addendum (19.12.2022)
 
-[PrevBlogPost]: https://jamesguthrie.ch/blog/nixos-on-raspberry-pi/
+I noticed that this blog post is missing some of the exact details, so I wrote [another post][NextBlogPost] which fills in some gaps.
+
+
+[PrevBlogPost]: /blog/nixos-on-raspberry-pi/
 [ComputeModule]: https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000
 [IoTRouter]: https://wiki.dfrobot.com/Compute_Module_4_IoT_Router_Board_Mini_SKU_DFR0767
 [NixDarwin]: https://github.com/LnL7/nix-darwin
@@ -177,3 +181,4 @@ Wow! Well that's enough success for one evening. In part II we'll take a look at
 [LnL7NixDocker]: https://hub.docker.com/r/lnl7/nix
 [NixOsNixDocker]: https://hub.docker.com/r/nixos/nix
 [BraveSoul]: https://github.com/NixOS/nix/issues/4219#issuecomment-917673219
+[NextBlogPost]: /blog/docker-based-nix-builder-macos
