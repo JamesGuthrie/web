@@ -117,7 +117,10 @@ SET max_parallel_workers_per_gather = 64;
 
 
 ```sql
-postgres=> EXPLAIN (ANALYZE) SELECT sum(val) FROM data;
+EXPLAIN (ANALYZE) SELECT sum(val) FROM data;
+```
+
+```
                                                              QUERY PLAN
 -------------------------------------------------------------------------------------------------------------------------------------
  Finalize Aggregate  (cost=4620.48..4620.49 rows=1 width=8) (actual time=47.768..49.222 rows=1 loops=1)
