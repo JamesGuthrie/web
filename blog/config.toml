@@ -36,7 +36,7 @@ footer_about = """
 """
 
 footer_page = """
-© 2022, all rights reserved
+© James Guthrie, all rights reserved
 """
 
 not_found_message = """
