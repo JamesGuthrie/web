@@ -19,6 +19,11 @@ highlight_code = true
 [extra]
 # Put all your custom variables here
 
+analytics = """
+<script src="https://cdn.usefathom.com/script.js" data-site="XGNRLDEF" defer></script>
+<script defer data-domain="jamesguthrie.ch" src="https://plausible.io/js/script.js"></script>
+"""
+
 dark_mode = true
 
 nav = [
