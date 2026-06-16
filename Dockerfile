@@ -1,12 +1,12 @@
-FROM alpine as builder
+FROM alpine AS builder
 
 RUN apk add zola
 
 COPY blog /blog
 
-WORKDIR blog
+WORKDIR /blog
 
-RUN zola build --base-url ""
+RUN zola build --base-url=""
 
 FROM ghcr.io/jamesguthrie/httpserve:0.3.2
 
