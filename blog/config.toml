@@ -28,6 +28,8 @@ analytics = """
 
 dark_mode = true
 
+katex = true
+
 nav = [
     { name = "Blog", path = "/blog/" },
     { name = "Contact", path = "/contact/" },
